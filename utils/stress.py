@@ -25,13 +25,12 @@ def str_array(arr):
     return line
  
 def gen_input():
-    test = "1\n";
-    n = get_random_int(1, 10)
+    n = get_random_int(2, 10)
+    p = get_random_int(1, 25)
     a = get_random_array(n, 1, n)
-    b = get_random_array(n, 1, n)
-    test += str_int(n)
+    test = str_int(n)
+    test += str_int(p)
     test += str_array(a)
-    test += str_array(b)
     return test
 
 def stress():
@@ -39,8 +38,8 @@ def stress():
         os.mkdir("input")
     if not os.path.exists("output"):
         os.mkdir("output")
-    # for _ in range(NUMBER_OF_TESTS):
-    while (True):
+    for i in range(NUMBER_OF_TESTS):
+    # while (True):
         with open("input/test.in", 'w') as f:
             f.write(gen_input())
         f.close()
@@ -49,9 +48,7 @@ def stress():
         f1 = open('output/solution.out', 'r')
         f2 = open('output/test.out', 'r')
         x = f1.read()   
-        lx = x.split()
         y = f2.read()
-        ly = y.split()
         if (y != x):
             f3 = open('input/test.in', 'r')
             z = f3.read()
@@ -59,6 +56,8 @@ def stress():
             print(x)
             print(y)
             break;
+        else:
+            print(f"Test {i} passed!")
 
 print(gen_input())
 stress()
